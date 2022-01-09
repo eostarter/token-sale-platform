@@ -32,7 +32,7 @@ const Help = () => {
             <Box className={classes.boxLinks}>
               <GitHubIcon />
               <Link
-                href="https://github.com/eoscostarica"
+                href="https://github.com/eostarter"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -52,7 +52,7 @@ const Help = () => {
             <Box className={classes.boxLinks}>
               <HttpIcon />
               <Link
-                href="https://eoscostarica.io/"
+                href="https://eostarter.org/"
                 target="_blank"
                 rel="noreferrer"
               >

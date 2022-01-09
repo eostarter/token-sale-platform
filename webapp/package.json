@@ -1,8 +1,8 @@
 {
-  "name": "eosioboilerplate",
+  "name": "eostokensale-webapp",
   "version": "1.0.0",
-  "description": "EOSIO Boilerplate WebApp",
-  "repository": "https://github.com/eoscostarica/eosioboilerplate.git",
+  "description": "A Token Sale Platform for EOS",
+  "repository": "https://github.com/eostarter/token-sale-platform.git",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",

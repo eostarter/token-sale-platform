@@ -6,13 +6,13 @@
     "darkMode": "Dark Mode"
   },
   "routes": {
-    "/>title": "EOSIO Boilerplate",
+    "/>title": "Token Sale Platform",
     "/>sidebar": "Home",
     "/>heading": "Welcome",
-    "/about>title": "About | EOSIO Boilerplate",
+    "/about>title": "About | Token Sale Platform",
     "/about>sidebar": "About",
     "/about>heading": "About",
-    "/help>title": "Help | EOSIO Boilerplate",
+    "/help>title": "Help | Token Sale Platform",
     "/help>sidebar": "Help",
     "/help>heading": "Help",
     "docs": "Docs",
@@ -36,8 +36,8 @@
   "helpRoute": {
     "title": "Thank you for using our product!",
     "paragraph": "This project is still work in progress. Please feel free to leave upgrade suggestions, log bugs, or use the code yourself. You can also find us on Telegram or visit our website.",
-    "githubEOSCR": "GitHub EOS Costa Rica",
+    "githubEOSCR": "GitHub EOStarter",
     "telegramChannel": "Telegram Channel",
-    "websiteEOSCR": "Website EOS Costa Rica"
+    "websiteEOSCR": "Website EOStarter"
   }
 }
