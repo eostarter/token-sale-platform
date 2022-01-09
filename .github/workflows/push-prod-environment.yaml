@@ -1,0 +1,94 @@
+name: Build images from latest master branch
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  create-prod-image:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v1
+
+      - name: Setup Docker
+        uses: docker-practice/actions-setup-docker@0.0.1
+
+      - name: Log in to docker registry
+        run: |
+          echo ${{ secrets.DOCKER_PASSWORD }} | docker login \
+            --username ${{ secrets.DOCKER_USERNAME }} \
+            --password-stdin
+
+      - name: Build new images and push
+        run: |
+          make \
+            build-docker-images \
+            push-docker-images
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          # webapp
+          PORT: 80
+          REACT_APP_TAG: ${{ github.ref }}
+          REACT_APP_VERSION: ${{ github.ref }}
+          REACT_APP_NAME: 'eoscr_boilerplate'
+          REACT_APP_TITLE: 'Full-Stack Boilerplate'
+          REACT_APP_LOGO: 'https://raw.githubusercontent.com/eoscostarica/design-assets/master/logos/eosCR/fullColor-vertiall-transparent-white.png'
+          REACT_APP_FOOTER_LINKS: '[]'
+          REACT_APP_UAL_APP_NAME: 'Full-Stack Boilerplate'
+          REACT_APP_UAL_API_PROTOCOL: 'https'
+          REACT_APP_UAL_API_HOST: 'jungle.eosio.cr'
+          REACT_APP_UAL_API_PORT: '443'
+          REACT_APP_UAL_CHAIN_ID: '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840'
+          REACT_APP_HASURA_URL: ${{ secrets.REACT_APP_HASURA_URL }}
+
+      - name: Build kubernetes files
+        id: build_kubernetes_files
+        run: |
+          make \
+            build-kubernetes
+        env:
+          # general
+          NAMESPACE: boilerplate
+          INGRESS_HOST: boilerplate.eosio.cr
+          INGRESS_GRAPHQL_HOST: graphql-boilerplate.eosio.cr
+          # Postgres
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_DATA: ${{ secrets.POSTGRES_DATA }}
+          # hapi
+          HAPI_SERVER_PORT: 9090
+          HAPI_SERVER_ADDRESS: 0.0.0.0
+          HAPI_NETWORK_API: 'https://jungle.eosio.cr'
+          HAPI_NETWORK_CHAIN_ID: '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840'
+          HAPI_NETWORK_BASE_ACCOUNT: ${{ secrets.HAPI_NETWORK_BASE_ACCOUNT }}
+          HAPI_NETWORK_BASE_PASSWORD: ${{ secrets.HAPI_NETWORK_BASE_PASSWORD }}
+          HAPI_NETWORK_WALLET_URL: ${{ secrets.HAPI_NETWORK_WALLET }}
+          HAPI_HASURA_URL: ${{ secrets.HAPI_HASURA_URL }}
+          HAPI_HASURA_ADMIN_SECRET: ${{ secrets.HAPI_HASURA_ADMIN_SECRET }}
+          # hasura
+          HASURA_GRAPHQL_ENABLE_CONSOLE: true
+          HASURA_GRAPHQL_DATABASE_URL: ${{ secrets.HASURA_GRAPHQL_DATABASE_URL }}
+          HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
+          HASURA_GRAPHQL_UNAUTHORIZED_ROLE: ${{ secrets.HASURA_GRAPHQL_UNAUTHORIZED_ROLE }}
+          HASURA_GRAPHQL_ACTION_BASE_URL: ${{ secrets.HASURA_GRAPHQL_ACTION_BASE_URL }}
+
+      - name: Deploy kubernetes files
+        uses: steebchen/kubectl@v1.1.0
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+          NAMESPACE: boilerplate
+          K8S_BUILD_DIR: build_k8s
+        with:
+          args: version && make deploy-kubernetes
+
+      - name: Create Release
+        id: create_release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: true

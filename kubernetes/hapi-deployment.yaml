@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hapi
+  name: hapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hapi
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: hapi
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - image: ${DOCKER_REGISTRY}/${IMAGE_NAME_HAPI}:${VERSION}
+          imagePullPolicy: 'Always'
+          name: 'hapi'
+          envFrom:
+            - configMapRef:
+                name: hapi-config
+          ports:
+            - containerPort: 9090
