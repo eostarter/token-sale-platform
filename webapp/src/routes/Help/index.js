@@ -42,7 +42,7 @@ const Help = () => {
             <Box className={classes.boxLinks}>
               <TelegramIcon />
               <Link
-                href="https://web.telegram.org/#/eoscr"
+                href="https://t.me/eostarter"
                 target="_blank"
                 rel="noreferrer"
               >
