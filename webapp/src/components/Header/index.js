@@ -48,7 +48,7 @@ SwitchThemeModeButton.propTypes = {
   onSwitch: PropTypes.func
 }
 
-const LanguageButton = memo(({ current, onChange }) => {
+const LanguageButton = ({ current, onChange }) => {
   const [languageAnchorEl, setLanguageAnchorEl] = useState(null)
   const languages = [
     {
@@ -92,7 +92,7 @@ const LanguageButton = memo(({ current, onChange }) => {
       </Menu>
     </>
   )
-})
+}
 
 LanguageButton.propTypes = {
   current: PropTypes.string,

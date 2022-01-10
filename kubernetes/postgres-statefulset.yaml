@@ -38,7 +38,7 @@ spec:
         name: postgres
       spec:
         accessModes: ['ReadWriteOnce']
-        storageClassName: boilerplate-storage
+        storageClassName: tokensale-storage
         resources:
           requests:
             storage: 100Gi

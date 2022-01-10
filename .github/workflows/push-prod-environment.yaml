@@ -34,11 +34,11 @@ jobs:
           PORT: 80
           REACT_APP_TAG: ${{ github.ref }}
           REACT_APP_VERSION: ${{ github.ref }}
-          REACT_APP_NAME: 'eoscr_boilerplate'
-          REACT_APP_TITLE: 'Full-Stack Boilerplate'
-          REACT_APP_LOGO: 'https://raw.githubusercontent.com/eoscostarica/design-assets/master/logos/eosCR/fullColor-vertiall-transparent-white.png'
+          REACT_APP_NAME: 'tokensale-webapp'
+          REACT_APP_TITLE: 'Token Sale Platform'
+          REACT_APP_LOGO: 'https://cdn-images-1.medium.com/max/300/1*PTLxJ293xoXk3afFmKR1cA.jpeg'
           REACT_APP_FOOTER_LINKS: '[]'
-          REACT_APP_UAL_APP_NAME: 'Full-Stack Boilerplate'
+          REACT_APP_UAL_APP_NAME: 'Token Sale Platform'
           REACT_APP_UAL_API_PROTOCOL: 'https'
           REACT_APP_UAL_API_HOST: 'jungle.eosio.cr'
           REACT_APP_UAL_API_PORT: '443'
@@ -52,9 +52,9 @@ jobs:
             build-kubernetes
         env:
           # general
-          NAMESPACE: boilerplate
-          INGRESS_HOST: boilerplate.eosio.cr
-          INGRESS_GRAPHQL_HOST: graphql-boilerplate.eosio.cr
+          NAMESPACE: tokensale
+          INGRESS_HOST: tokensale.eosio.cr
+          INGRESS_GRAPHQL_HOST: graphql-tokensale.eosio.cr
           # Postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -81,7 +81,7 @@ jobs:
         uses: steebchen/kubectl@v1.1.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-          NAMESPACE: boilerplate
+          NAMESPACE: tokensale
           K8S_BUILD_DIR: build_k8s
         with:
           args: version && make deploy-kubernetes

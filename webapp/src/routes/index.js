@@ -42,19 +42,19 @@ const routes = [
   {
     name: 'changelog',
     badge: mainConfig.appVersion,
-    path: 'https://github.com/eoscostarica/full-stack-boilerplate/tags',
+    path: 'https://github.com/eostarter/token-sale-platform/tags',
     icon: <GitMergeIcon />,
     exact: true
   },
   {
     header: 'community',
     name: 'github',
-    path: 'https://github.com/eoscostarica/full-stack-boilerplate',
+    path: 'https://github.com/eostarter/token-sale-platform',
     icon: <GitHubIcon />
   },
   {
     name: 'telegram',
-    path: 'https://t.me/blockchaincostarica',
+    path: 'https://t.me/eostarter',
     icon: <TelegramIcon />
   },
   {
