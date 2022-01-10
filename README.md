@@ -1,6 +1,6 @@
 <p align="center">
 	<a href="https://eostarter.org">
-		<img src="./docs/images/logo-words.png" width="300">
+		<img src="./docs/img/logo-words.png" width="300">
 	</a>
 </p>
 <br/>
@@ -170,7 +170,7 @@ Please report bugs big and small by [opening an issue](https://github.com/eostar
 
 <p align="center">
 	<a href="https://eostarter.org">
-		<img src="./docs/images/logo-words.png" width="300">
+		<img src="./docs/img/logo-words.png" width="300">
 	</a>
 </p>
 <br/>
