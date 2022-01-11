@@ -110,9 +110,6 @@ build-docker-images:
 
 push-docker-images: ##@devops Publish docker images
 push-docker-images:
-	@echo $(DOCKER_PASSWORD) | docker login \
-		--username $(DOCKER_USERNAME) \
-		--password-stdin
 	for dir in $(SUBDIRS); do \
 		$(MAKE) push-image -C $$dir; \
 	done
