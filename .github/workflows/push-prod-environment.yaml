@@ -19,7 +19,7 @@ jobs:
       - name: Log in to docker registry
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | docker login \
-            docker.pkg.github.com \
+            ghcr.io \
             --username ${{ github.actor }} \
             --password-stdin
 

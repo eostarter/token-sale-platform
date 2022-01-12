@@ -8,7 +8,7 @@ IMAGE_NAME_HAPI=tokensale-hapi
 IMAGE_NAME_HASURA=tokensale-hasura
 IMAGE_NAME_WALLET=tokensale-wallet
 
-DOCKER_REGISTRY=docker.pkg.github.com/eostarter/token-sale-platform
+DOCKER_REGISTRY=ghcr.io/eostarter/token-sale-platform
 SUBDIRS = webapp hapi hasura wallet
 
 MAKE_ENV += DOCKER_REGISTRY VERSION IMAGE_NAME_WEBAPP IMAGE_NAME_HAPI IMAGE_NAME_WALLET IMAGE_NAME_HASURA
