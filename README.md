@@ -132,7 +132,7 @@ Within the download you'll find the following directories and files:
 ## Infrastructure Diagram
 
 <p align="center">
-  <img src="docs/img/infra.svg" />
+  <img src="docs/img/infrastructure.png" />
 </p>
 
 ## Technologies Specification
