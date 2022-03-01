@@ -3,12 +3,50 @@
     "login": "Login",
     "signOut": "Logout",
     "lightMode": "Light Mode",
-    "darkMode": "Dark Mode"
+    "darkMode": "Dark Mode",
+    "send": "Send",
+    "errorMessage": "We got this error: {{ message }}"
   },
   "routes": {
     "/>title": "Token Sale Platform",
     "/>sidebar": "Home",
     "/>heading": "Token Sale Platform",
+    "/add-user>title": "Add User | Token Sale Platform",
+    "/add-user>sidebar": "Add User",
+    "/add-user>heading": "Add User",
+    "/add-pool>title": "Add Pool | Token Sale Platform",
+    "/pools>title": "Pools | Token Sale Platform",
+    "/pools>sidebar": "Pools",
+    "/pools>heading": "Pools",
+    "/add-pool>sidebar": "Add Pool",
+    "/add-pool>heading": "Add Pool",
+    "/approve-pool>title": "Approve Pool | Token Sale Platform",
+    "/approve-pool>sidebar": "Approve Pool",
+    "/approve-pool>heading": "Approve Pool",
+    "/token-deposit>title": "Token Deposit | Token Sale Platform",
+    "/token-deposit>sidebar": "Token Deposit",
+    "/token-deposit>heading": "Token Deposit",
+    "/start-sale>title": "Start Sale | Token Sale Platform",
+    "/start-sale>sidebar": "Start Sale",
+    "/start-sale>heading": "Start Sale",
+    "/subscribe>title": "Subscribe | Token Sale Platform",
+    "/subscribe>sidebar": "Subscribe",
+    "/subscribe>heading": "Subscribe",
+    "/approve-subscription>title": "Approve Subscription | Token Sale Platform",
+    "/approve-subscription>sidebar": "Approve Subscription",
+    "/approve-subscription>heading": "Approve Subscription",
+    "/contribution>title": "Contribution | Token Sale Platform",
+    "/contribution>sidebar": "Contribution",
+    "/contribution>heading": "Contribution",
+    "/end-sale>title": "End Sale | Token Sale Platform",
+    "/end-sale>sidebar": "End Sale",
+    "/end-sale>heading": "End Sale",
+    "/owner-claim>title": "Claim | Token Sale Platform",
+    "/owner-claim>sidebar": "Claim",
+    "/owner-claim>heading": "Claim",
+    "/investor-claim>title": "Claim | Token Sale Platform",
+    "/investor-claim>sidebar": "Claim",
+    "/investor-claim>heading": "Claim",
     "/about>title": "About | Token Sale Platform",
     "/about>sidebar": "About",
     "/about>heading": "About",
@@ -23,6 +61,77 @@
   },
   "homeRoute": {
     "welcomeMessage": "The idea for this project is to build an open-source contract that any project can use to sell its tokens. We will then implement these smart contracts to build the EOSTARTER Token Sale platform."
+  },
+  "AddUserRoute": {
+    "title": "Add User Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "User added successfully {{ trxid }}"
+  },
+  "PoolsRoute": {
+    "title": "Pools",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet..."
+  },
+  "AddPoolRoute": {
+    "title": "Add Pool Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Pool added successfully {{ trxid }}"
+  },
+  "ApprovePoolRoute": {
+    "title": "Approve Pool Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Pool approved successfully {{ trxid }}"
+  },
+  "TokenDepositRoute": {
+    "title": "Token Deposit Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Tokens deposited successfully {{ trxid }}"
+  },
+  "StartSaleRoute": {
+    "title": "Start Sale Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Started sale successfully {{ trxid }}"
+  },
+  "SubscribeRoute": {
+    "title": "Subscribe Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Subscribed successfully {{ trxid }}"
+  },
+  "ApproveSubscriptionRoute": {
+    "title": "Approve Subscription Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Subscription approved successfully {{ trxid }}"
+  },
+  "ContributionRoute": {
+    "title": "Contribution Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Contribution completed successfully {{ trxid }}"
+  },
+  "EndSaleRoute": {
+    "title": "End Sale Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Sale ended successfully {{ trxid }}"
+  },
+  "OwnerClaimRoute": {
+    "title": "Owner Claim Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Tokens claimed successfully {{ trxid }}"
+  },
+  "InvestorClaimRoute": {
+    "title": "Investor Claim Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "Tokens claimed successfully {{ trxid }}"
   },
   "aboutRoute": {
     "title": "Token Sale Platform",

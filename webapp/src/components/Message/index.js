@@ -20,7 +20,7 @@ const Message = () => {
     }
 
     setOpen(false)
-    hideMessage()
+    setTimeout(hideMessage, 1000)
   }
 
   useEffect(() => {
@@ -32,7 +32,15 @@ const Message = () => {
   }, [message])
 
   return (
-    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+    <Snackbar
+      open={open}
+      onClose={handleClose}
+      autoHideDuration={message?.autoHideDuration || 6000}
+      anchorOrigin={{
+        vertical: message?.vertical || 'bottom',
+        horizontal: message?.horizontal || 'center'
+      }}
+    >
       <Alert
         severity={message?.type || 'info'}
         variant="filled"

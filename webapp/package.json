@@ -34,6 +34,7 @@
     "@mui/lab": "^5.0.0-alpha.48",
     "@mui/material": "^5.0.1",
     "@mui/styles": "^5.0.1",
+    "@mui/x-data-grid": "^5.5.1",
     "core-js": "^3.15.2",
     "date-fns": "^2.22.1",
     "eosjs-api": "^7.0.4",
@@ -53,17 +54,14 @@
     "react-perfect-scrollbar": "^1.5.8",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "~4.0.3",
     "subscriptions-transport-ws": "^0.9.19",
     "ual-anchor": "^1.1.4",
     "ual-ledger": "^0.3.0",
     "ual-lynx": "^0.4.0",
     "ual-meetone": "^0.1.1",
     "ual-metamask": "^1.0.2",
-    "ual-reactjs-renderer": "^0.3.1",
-    "ual-scatter": "^0.3.0",
-    "ual-token-pocket": "^0.3.0",
-    "ual-wombat": "^0.3.3"
+    "ual-token-pocket": "^0.3.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
@@ -85,6 +83,10 @@
     "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "react-app-rewired": "^2.1.8",
+    "react-error-overlay": "~6.0.9",
     "standard": "^16.0.3"
+  },
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
   }
 }

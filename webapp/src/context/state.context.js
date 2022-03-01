@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 
+import { tokenSaleUtil } from '../utils'
+
 const SharedStateContext = React.createContext()
 
 const initialValue = {
@@ -66,7 +68,18 @@ export const SharedStateProvider = ({ children, ual, ...props }) => {
 
   useEffect(() => {
     const load = async () => {
-      dispatch({ type: 'userChange', user: ual.activeUser })
+      const user = ual.activeUser
+
+      if (user) {
+        const role = await tokenSaleUtil.getUserRole(user.accountName)
+
+        user.role = role
+      }
+
+      dispatch({
+        user,
+        type: 'userChange'
+      })
       dispatch({ type: 'ual', ual })
     }
 
