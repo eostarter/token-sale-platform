@@ -5,3 +5,5 @@ export const logo = process.env.REACT_APP_LOGO
 export const footerLinks = JSON.parse(
   process.env.REACT_APP_FOOTER_LINKS || '[]'
 )
+export const tokenSaleContract =
+  process.env.TOKEN_SALE_CONTRACT || 'tokensaleapp'

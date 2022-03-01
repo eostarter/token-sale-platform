@@ -1,11 +1,9 @@
-import { Scatter } from 'ual-scatter'
-import { Ledger } from 'ual-ledger'
+import { Metamask } from 'ual-metamask'
 import { Lynx } from 'ual-lynx'
+import { Ledger } from 'ual-ledger'
 import { TokenPocket } from 'ual-token-pocket'
 import { MeetOne } from 'ual-meetone'
 import { Anchor } from 'ual-anchor'
-import { Wombat } from 'ual-wombat'
-import { Metamask } from 'ual-metamask'
 
 export const endpoint = `${process.env.REACT_APP_UAL_API_PROTOCOL}://${
   process.env.REACT_APP_UAL_API_HOST
@@ -29,8 +27,6 @@ export const authenticators = [
   new Metamask([network]),
   new Lynx([network]),
   new Ledger([network]),
-  new Scatter([network], { appName }),
-  new Wombat([network], { appName }),
   new TokenPocket([network]),
   new MeetOne([network.chainId]),
   new Anchor([network], { appName })
