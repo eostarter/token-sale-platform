@@ -8,12 +8,11 @@ K8S_BUILD_DIR ?= ./build_k8s
 K8S_FILES := $(shell find ./kubernetes -name '*.yaml' | sed 's:./kubernetes/::g')
 
 run:
-	# make -B postgres
-	# make -B wallet
-	# make -B hapi
-	# make -B hasura
-	# make -B -j 3 hapi-logs hasura-cli webapp
-	make -B webapp
+	make -B postgres
+	make -B wallet
+	make -B hapi
+	make -B hasura
+	make -B -j 3 hapi-logs hasura-cli webapp
 
 postgres:
 	@docker-compose stop postgres
@@ -58,10 +57,10 @@ hasura-cli:
 
 webapp:
 	$(eval -include .env)
-	# @until \
-	# 	curl -s -o /dev/null -w 'hasura status %{http_code}\n' http://localhost:8080/healthz; \
-	# 	do echo "$(BLUE)webapp |$(RESET) waiting for hasura service"; \
-	# 	sleep 5; done;
+	@until \
+		curl -s -o /dev/null -w 'hasura status %{http_code}\n' http://localhost:8080/healthz; \
+		do echo "$(BLUE)webapp |$(RESET) waiting for hasura service"; \
+		sleep 5; done;
 	@cd webapp && yarn && yarn start:local | cat
 	@echo "done webapp"
 
