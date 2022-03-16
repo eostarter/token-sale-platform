@@ -27,7 +27,9 @@ const AddPool = () => {
   const [{ user }, { showMessage }] = useSharedState()
   const [showInfo, setShowInfo] = useState(false)
   const [payload, setPayload] = useState({
-    owner: user.accountName
+    owner: user.accountName,
+    launch_date: new Date(),
+    end_date: new Date()
   })
 
   const handleOnChange = type => field => event => {
@@ -56,7 +58,21 @@ const AddPool = () => {
   }
 
   const handleOnSubmit = async () => {
+    if (Object.keys(payload).length < 12) {
+      showMessage({
+        type: 'error',
+        content: t('missingRequiredFields')
+      })
+
+      return
+    }
+
     try {
+      payload.launch_date.setSeconds(0)
+      payload.launch_date.setMilliseconds(0)
+      payload.end_date.setSeconds(0)
+      payload.end_date.setMilliseconds(0)
+
       const response = await tokenSaleUtil.addPool(user, payload)
 
       showMessage({
@@ -66,9 +82,12 @@ const AddPool = () => {
         })
       })
       setPayload({
-        owner: user.accountName
+        owner: user.accountName,
+        launch_date: new Date(),
+        end_date: new Date()
       })
     } catch (error) {
+      console.log(error)
       showMessage({
         type: 'error',
         content: t('errorMessage', {
@@ -143,31 +162,34 @@ const AddPool = () => {
           />
           <TextField
             label={t('token_symbol')}
+            placeholder="4,JUNGLE"
             value={payload.token_symbol || ''}
             onChange={handleOnChange('text')('token_symbol')}
             variant="filled"
           />
           <TextField
             label={t('token_price')}
+            placeholder="0.5"
             value={payload.token_price || ''}
             onChange={handleOnChange('text')('token_price')}
             variant="filled"
           />
           <TextField
             label={t('tokens_on_sale')}
+            placeholder="1.0000 JUNGLE"
             value={payload.tokens_on_sale || ''}
             onChange={handleOnChange('text')('tokens_on_sale')}
             variant="filled"
           />
           <DateTimePicker
             label={t('launch_date')}
-            value={payload.launch_date || new Date()}
+            value={payload.launch_date}
             onChange={handleOnChange('date')('launch_date')}
             renderInput={params => <TextField variant="filled" {...params} />}
           />
           <DateTimePicker
             label={t('end_date')}
-            value={payload.end_date || new Date()}
+            value={payload.end_date}
             onChange={handleOnChange('date')('end_date')}
             renderInput={params => <TextField variant="filled" {...params} />}
           />
