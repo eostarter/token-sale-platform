@@ -77,7 +77,8 @@
     "title": "Add Pool Action",
     "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
     "tooltip": "Lorem ipsum dolor sit amet...",
-    "successMessage": "Pool added successfully {{ trxid }}"
+    "successMessage": "Pool added successfully {{ trxid }}",
+    "missingRequiredFields": "All fields are required"
   },
   "ApprovePoolRoute": {
     "title": "Approve Pool Action",
