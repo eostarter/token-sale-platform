@@ -11,9 +11,15 @@
     "/>title": "Token Sale Platform",
     "/>sidebar": "Home",
     "/>heading": "Token Sale Platform",
+    "/users>title": "Users | Token Sale Platform",
+    "/users>sidebar": "Users",
+    "/users>heading": "Users",
     "/add-user>title": "Add User | Token Sale Platform",
     "/add-user>sidebar": "Add User",
     "/add-user>heading": "Add User",
+    "/edit-user>title": "Edit User | Token Sale Platform",
+    "/edit-user>sidebar": "Edit User",
+    "/edit-user>heading": "Edit User",
     "/add-pool>title": "Add Pool | Token Sale Platform",
     "/pools>title": "Pools | Token Sale Platform",
     "/pools>sidebar": "Pools",
@@ -62,11 +68,21 @@
   "homeRoute": {
     "welcomeMessage": "The idea for this project is to build an open-source contract that any project can use to sell its tokens. We will then implement these smart contracts to build the EOSTARTER Token Sale platform."
   },
+  "UsersRoute": {
+    "title": "User",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur..."
+  },
   "AddUserRoute": {
     "title": "Add User Action",
     "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
     "tooltip": "Lorem ipsum dolor sit amet...",
     "successMessage": "User added successfully {{ trxid }}"
+  },
+  "EditUserRoute": {
+    "title": "Edit User Action",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
+    "tooltip": "Lorem ipsum dolor sit amet...",
+    "successMessage": "User edited successfully {{ trxid }}"
   },
   "PoolsRoute": {
     "title": "Pools",
@@ -76,7 +92,7 @@
   "AddPoolRoute": {
     "title": "Add Pool Action",
     "subtitle": "Lorem ipsum dolor sit amet, consectetur...",
-    "tooltip": "Lorem ipsum dolor sit amet...",
+    "tooltip": "----- name is restricted up to 12 characters (1-5, a-z) ----- token_symbol must specify the precision and the token code separed by \",\" for example: 4,JUNGLE ----- tokens_on_sale must match the token precision and use the token symbol as sufix for example: 10.0000 JUNGLE",
     "successMessage": "Pool added successfully {{ trxid }}",
     "missingRequiredFields": "All fields are required"
   },

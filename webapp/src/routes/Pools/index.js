@@ -124,13 +124,15 @@ const Pools = () => {
 
   useEffect(() => {
     const load = async () => {
-      const pools = await tokenSaleUtil.getPools()
+      const pools = await tokenSaleUtil.getPools(
+        user.role === tokenSaleUtil.ROLES.OWNER ? user.accountName : null
+      )
 
       setPools(pools)
     }
 
     load()
-  }, [])
+  }, [user])
 
   return (
     <Box className={classes.root}>

@@ -49,56 +49,6 @@ const CONTRIBUTION_PRECISION = 4
 
 const GUEST_ROLE = 'guest'
 
-const getUserRole = async accountName => {
-  if (!accountName) {
-    return GUEST_ROLE
-  }
-
-  if (accountName === mainConfig.tokenSaleContract) {
-    return ROLES_NAMES[0]
-  }
-
-  const { rows } = await eosApi.getTableRows({
-    json: true,
-    code: mainConfig.tokenSaleContract,
-    scope: mainConfig.tokenSaleContract,
-    table: 'user',
-    lower_bound: accountName,
-    upper_bound: accountName
-  })
-
-  if (!rows.length) {
-    return GUEST_ROLE
-  }
-
-  return ROLES_NAMES[rows[0].role] || GUEST_ROLE
-}
-
-const addUser = (user, payload) => {
-  return user.signTransaction(
-    {
-      actions: [
-        {
-          account: mainConfig.tokenSaleContract,
-          name: 'adduser',
-          authorization: [
-            {
-              actor: user.accountName,
-              permission: 'active'
-            }
-          ],
-          data: payload
-        }
-      ]
-    },
-    {
-      broadcast: true,
-      blocksBehind: 3,
-      expireSeconds: 60
-    }
-  )
-}
-
 const addPool = (user, payload) => {
   return user.signTransaction(
     {
@@ -147,23 +97,6 @@ const approvePool = (user, payload) => {
       expireSeconds: 60
     }
   )
-}
-
-const getPool = async name => {
-  if (!name) {
-    return null
-  }
-
-  const { rows } = await eosApi.getTableRows({
-    json: true,
-    code: mainConfig.tokenSaleContract,
-    scope: mainConfig.tokenSaleContract,
-    table: 'pool',
-    lower_bound: name,
-    upper_bound: name
-  })
-
-  return rows[0]
 }
 
 const tokenDeposit = (user, payload) => {
@@ -378,15 +311,148 @@ const investorClaim = (user, payload) => {
   )
 }
 
-const getPools = async () => {
+const getPools = async owner => {
+  let options = {}
+
+  if (owner) {
+    options = {
+      key_type: 'name',
+      index_position: 2,
+      lower_bound: owner,
+      upper_bound: owner
+    }
+  }
+
   const { rows } = await eosApi.getTableRows({
     json: true,
     code: mainConfig.tokenSaleContract,
     scope: mainConfig.tokenSaleContract,
-    table: 'pool'
+    table: 'pool',
+    ...options
   })
 
   return rows.map(row => ({ ...row, status: POOL_STATUS_NAMES[row.status] }))
+}
+
+const getPool = async name => {
+  if (!name) {
+    return null
+  }
+
+  const { rows } = await eosApi.getTableRows({
+    json: true,
+    code: mainConfig.tokenSaleContract,
+    scope: mainConfig.tokenSaleContract,
+    table: 'pool',
+    lower_bound: name,
+    upper_bound: name
+  })
+
+  return rows[0]
+}
+
+const getUsers = async () => {
+  const { rows } = await eosApi.getTableRows({
+    json: true,
+    code: mainConfig.tokenSaleContract,
+    scope: mainConfig.tokenSaleContract,
+    table: 'user'
+  })
+
+  return rows.map(row => ({ ...row, role: ROLES_NAMES[row.role] }))
+}
+
+const getUser = async name => {
+  if (!name) {
+    return null
+  }
+
+  const { rows } = await eosApi.getTableRows({
+    json: true,
+    code: mainConfig.tokenSaleContract,
+    scope: mainConfig.tokenSaleContract,
+    table: 'user',
+    lower_bound: name,
+    upper_bound: name
+  })
+
+  return rows[0]
+}
+
+const getUserRole = async accountName => {
+  if (!accountName) {
+    return GUEST_ROLE
+  }
+
+  if (accountName === mainConfig.tokenSaleContract) {
+    return ROLES_NAMES[0]
+  }
+
+  const { rows } = await eosApi.getTableRows({
+    json: true,
+    code: mainConfig.tokenSaleContract,
+    scope: mainConfig.tokenSaleContract,
+    table: 'user',
+    lower_bound: accountName,
+    upper_bound: accountName
+  })
+
+  if (!rows.length) {
+    return GUEST_ROLE
+  }
+
+  return ROLES_NAMES[rows[0].role] || GUEST_ROLE
+}
+
+const addUser = (user, payload) => {
+  return user.signTransaction(
+    {
+      actions: [
+        {
+          account: mainConfig.tokenSaleContract,
+          name: 'adduser',
+          authorization: [
+            {
+              actor: user.accountName,
+              permission: 'active'
+            }
+          ],
+          data: payload
+        }
+      ]
+    },
+    {
+      broadcast: true,
+      blocksBehind: 3,
+      expireSeconds: 60
+    }
+  )
+}
+
+const editUser = (user, payload) => {
+  console.log(payload)
+  return user.signTransaction(
+    {
+      actions: [
+        {
+          account: mainConfig.tokenSaleContract,
+          name: 'edituser',
+          authorization: [
+            {
+              actor: user.accountName,
+              permission: 'active'
+            }
+          ],
+          data: payload
+        }
+      ]
+    },
+    {
+      broadcast: true,
+      blocksBehind: 3,
+      expireSeconds: 60
+    }
+  )
 }
 
 const getSubscriptions = async name => {
@@ -407,7 +473,10 @@ export const tokenSaleUtil = {
   POOL_STATUS_NAMES,
   SUBSCRIPTION_STATUS,
   getUserRole,
+  getUsers,
+  getUser,
   addUser,
+  editUser,
   addPool,
   approvePool,
   getPool,
