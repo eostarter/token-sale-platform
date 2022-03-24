@@ -64,9 +64,7 @@ const ApproveSubscription = () => {
           trxid: response.transactionId.slice(-6)
         })
       })
-      setPayload({
-        account: user.accountName
-      })
+      setPayload({})
     } catch (error) {
       showMessage({
         type: 'error',

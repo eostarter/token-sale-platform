@@ -14,13 +14,17 @@ import {
   HelpCircle as HelpIcon,
   GitMerge as GitMergeIcon,
   GitHub as GitHubIcon,
-  Send as TelegramIcon
+  Send as TelegramIcon,
+  Users as UsersIcon,
+  Edit as EditIcon
 } from 'react-feather'
 
 import { mainConfig } from '../config'
 
 const Home = lazy(() => import('./Home'))
+const Users = lazy(() => import('./Users'))
 const AddUser = lazy(() => import('./AddUser'))
+const EditUser = lazy(() => import('./EditUser'))
 const Pools = lazy(() => import('./Pools'))
 const AddPool = lazy(() => import('./AddPool'))
 const ApprovePool = lazy(() => import('./ApprovePool'))
@@ -46,10 +50,26 @@ const routes = [
     exact: true
   },
   {
+    name: 'users',
+    icon: <UsersIcon />,
+    component: Users,
+    path: '/users',
+    exact: true,
+    roles: ['ADMIN']
+  },
+  {
     name: 'adduser',
     icon: <PlusSquareIcon />,
     component: AddUser,
     path: '/add-user',
+    exact: true,
+    roles: ['ADMIN']
+  },
+  {
+    name: 'edituser',
+    icon: <EditIcon />,
+    component: EditUser,
+    path: '/edit-user',
     exact: true,
     roles: ['ADMIN']
   },

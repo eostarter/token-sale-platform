@@ -12,6 +12,8 @@ import IconButton from '@mui/material/IconButton'
 import HelpIcon from '@mui/icons-material/Help'
 import Tooltip from '@mui/material/Tooltip'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
+import Switch from '@mui/material/Switch'
+import FormControlLabel from '@mui/material/FormControlLabel'
 
 import { tokenSaleUtil, useQuery } from '../../utils'
 import { useSharedState } from '../../context/state.context'
@@ -20,14 +22,13 @@ import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const Contribution = () => {
+const EditUser = () => {
   const classes = useStyles()
-  const { t } = useTranslation('ContributionRoute')
+  const { t } = useTranslation('EditUserRoute')
   const query = useQuery()
+  const [{ user }, { showMessage }] = useSharedState()
   const [showInfo, setShowInfo] = useState(false)
   const [payload, setPayload] = useState({})
-  const [pool, setPool] = useState()
-  const [{ user }, { showMessage }] = useSharedState()
 
   const handleOnChange = type => field => event => {
     let value = null
@@ -53,22 +54,13 @@ const Contribution = () => {
       ...prev,
       [field]: value
     }))
-
-    if (field === 'tokens_to_send') {
-      setPayload(prev => ({
-        ...prev,
-        tokens_to_acquire: (value / pool.token_price).toFixed(
-          pool.token_symbol.split(',')[0]
-        )
-      }))
-    }
   }
 
   const handleOnSubmit = async () => {
     try {
-      const response = await tokenSaleUtil.contribution(user, {
-        ...pool,
-        ...payload
+      const response = await tokenSaleUtil.editUser(user, {
+        ...payload,
+        verified: payload.verified ? 1 : 0
       })
 
       showMessage({
@@ -89,20 +81,28 @@ const Contribution = () => {
   }
 
   useEffect(() => {
+    const account = query.get('account') || ''
+
     setPayload(prev => ({
       ...prev,
-      name: query.get('name') || ''
+      account
     }))
-  }, [query])
 
-  useEffect(() => {
-    const load = async () => {
-      const pool = await tokenSaleUtil.getPool(payload.name)
-      setPool(pool)
+    if (!account) {
+      return
     }
 
-    load()
-  }, [payload.name])
+    const loadUser = async () => {
+      const user = await tokenSaleUtil.getUser(account)
+
+      setPayload(prev => ({
+        ...prev,
+        verified: user.verified
+      }))
+    }
+
+    loadUser()
+  }, [query])
 
   return (
     <Box
@@ -138,43 +138,20 @@ const Contribution = () => {
         />
         <CardContent className={classes.fields}>
           <TextField
-            label={t('name')}
-            value={payload.name || ''}
-            onChange={handleOnChange('text')('name')}
+            label={t('account')}
+            value={payload.account || ''}
+            onChange={handleOnChange('text')('account')}
             variant="filled"
           />
-          <TextField
-            label={t('token_contract')}
-            value={pool?.token_contract || ''}
-            onChange={handleOnChange('text')('token_contract')}
-            variant="filled"
-            disabled
-          />
-          <TextField
-            label={t('tokens_on_sale')}
-            value={pool?.tokens_on_sale || ''}
-            onChange={handleOnChange('text')('tokens_on_sale')}
-            variant="filled"
-            disabled
-          />
-          <TextField
-            label={t('token_price')}
-            value={pool?.token_price || ''}
-            onChange={handleOnChange('text')('token_price')}
-            variant="filled"
-            disabled
-          />
-          <TextField
-            label={t('tokens_to_send')}
-            value={payload.tokens_to_send || ''}
-            onChange={handleOnChange('text')('tokens_to_send')}
-            variant="filled"
-          />
-          <TextField
-            label={t('tokens_to_acquire')}
-            value={payload.tokens_to_acquire || ''}
-            variant="filled"
-            disabled
+          <FormControlLabel
+            control={
+              <Switch
+                checked={!!payload.verified}
+                onChange={handleOnChange('bool')('verified')}
+                variant="filled"
+              />
+            }
+            label={t('verified')}
           />
         </CardContent>
         <CardActions>
@@ -185,6 +162,6 @@ const Contribution = () => {
   )
 }
 
-Contribution.propTypes = {}
+EditUser.propTypes = {}
 
-export default memo(Contribution)
+export default memo(EditUser)

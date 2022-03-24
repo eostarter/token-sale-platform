@@ -58,16 +58,8 @@ const AddPool = () => {
   }
 
   const handleOnSubmit = async () => {
-    if (Object.keys(payload).length < 12) {
-      showMessage({
-        type: 'error',
-        content: t('missingRequiredFields')
-      })
-
-      return
-    }
-
     try {
+      validatePayload()
       payload.launch_date.setSeconds(0)
       payload.launch_date.setMilliseconds(0)
       payload.end_date.setSeconds(0)
@@ -94,6 +86,19 @@ const AddPool = () => {
           message: t(error.message)
         })
       })
+    }
+  }
+
+  const validatePayload = () => {
+    console.log(
+      Object.keys(payload).length < 12 ||
+        !Object.values(payload).every(value => !!value)
+    )
+    if (
+      Object.keys(payload).length < 12 ||
+      Object.values(payload).every(value => !!value)
+    ) {
+      throw new Error('missingRequiredFields')
     }
   }
 
@@ -153,6 +158,7 @@ const AddPool = () => {
             value={payload.owner || ''}
             onChange={handleOnChange('text')('owner')}
             variant="filled"
+            disabled
           />
           <TextField
             label={t('token_contract')}

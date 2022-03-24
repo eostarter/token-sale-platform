@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { makeStyles } from '@mui/styles'
 import Box from '@mui/material/Box'
@@ -14,6 +14,10 @@ import IconButton from '@mui/material/IconButton'
 import HelpIcon from '@mui/icons-material/Help'
 import Tooltip from '@mui/material/Tooltip'
 import ClickAwayListener from '@mui/material/ClickAwayListener'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
 
 import { mainConfig } from '../../config'
 import { tokenSaleUtil } from '../../utils'
@@ -27,6 +31,7 @@ const AddUser = () => {
   const classes = useStyles()
   const { t } = useTranslation('AddUserRoute')
   const [showInfo, setShowInfo] = useState(false)
+  const [roles, setRoles] = useState([])
   const [payload, setPayload] = useState({
     verified: false,
     referral: mainConfig.tokenSaleContract
@@ -50,6 +55,7 @@ const AddUser = () => {
         break
 
       default:
+        console.log(event)
         break
     }
 
@@ -82,6 +88,14 @@ const AddUser = () => {
       })
     }
   }
+
+  useEffect(() => {
+    const [, ...roles] = Object.keys(tokenSaleUtil.ROLES_IDS).map(key => ({
+      value: tokenSaleUtil.ROLES_IDS[key],
+      label: tokenSaleUtil.ROLES_NAMES[tokenSaleUtil.ROLES_IDS[key]]
+    }))
+    setRoles(roles)
+  }, [])
 
   return (
     <Box
@@ -138,12 +152,24 @@ const AddUser = () => {
             }
             label={t('verified')}
           />
-          <TextField
-            label={t('role')}
-            value={payload.role || ''}
-            onChange={handleOnChange('text')('role')}
-            variant="filled"
-          />
+          <FormControl variant="filled">
+            <InputLabel id="userRoleLabel">{t('role')}</InputLabel>
+            <Select
+              labelId="userRoleLabel"
+              id="userRole"
+              value={payload.role || ''}
+              onChange={handleOnChange('text')('role')}
+            >
+              <MenuItem value="">
+                <em>{t('none')}</em>
+              </MenuItem>
+              {roles.map((role, index) => (
+                <MenuItem key={index} value={role.value}>
+                  {t(role.label)}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
           <TextField
             label={t('referral')}
             value={payload.referral || ''}
