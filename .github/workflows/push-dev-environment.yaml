@@ -43,7 +43,7 @@ jobs:
           REACT_APP_UAL_API_HOST: 'jungle3.cryptolions.io'
           REACT_APP_UAL_API_PORT: '443'
           REACT_APP_UAL_CHAIN_ID: '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840'
-          REACT_APP_HASURA_URL: 'https://graphql-tokensale.eosio.cr/v1/graphql'
+          REACT_APP_HASURA_URL: 'https://graphql-tokensale.edenia.cloud/v1/graphql'
 
       - name: Build kubernetes files
         id: build_kubernetes_files
@@ -53,8 +53,8 @@ jobs:
         env:
           # general
           NAMESPACE: tokensale
-          INGRESS_HOST: tokensale.eosio.cr
-          INGRESS_GRAPHQL_HOST: graphql-tokensale.eosio.cr
+          INGRESS_HOST: tokensale.edenia.cloud
+          INGRESS_GRAPHQL_HOST: graphql-tokensale.edenia.cloud
           # Postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}

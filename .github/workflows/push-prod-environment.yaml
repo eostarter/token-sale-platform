@@ -41,7 +41,7 @@ jobs:
           REACT_APP_FOOTER_LINKS: '[]'
           REACT_APP_UAL_APP_NAME: 'Token Sale Platform'
           REACT_APP_UAL_API_PROTOCOL: 'https'
-          REACT_APP_UAL_API_HOST: 'jungle.eosio.cr'
+          REACT_APP_UAL_API_HOST: 'jungle.edenia.cloud'
           REACT_APP_UAL_API_PORT: '443'
           REACT_APP_UAL_CHAIN_ID: '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840'
           REACT_APP_HASURA_URL: ${{ secrets.REACT_APP_HASURA_URL }}
@@ -54,8 +54,8 @@ jobs:
         env:
           # general
           NAMESPACE: tokensale
-          INGRESS_HOST: tokensale.eosio.cr
-          INGRESS_GRAPHQL_HOST: graphql-tokensale.eosio.cr
+          INGRESS_HOST: tokensale.edenia.cloud
+          INGRESS_GRAPHQL_HOST: graphql-tokensale.edenia.cloud
           # Postgres
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -64,7 +64,7 @@ jobs:
           # hapi
           HAPI_SERVER_PORT: 9090
           HAPI_SERVER_ADDRESS: 0.0.0.0
-          HAPI_NETWORK_API: 'https://jungle.eosio.cr'
+          HAPI_NETWORK_API: 'https://jungle.edenia.cloud'
           HAPI_NETWORK_CHAIN_ID: '2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840'
           HAPI_NETWORK_BASE_ACCOUNT: ${{ secrets.HAPI_NETWORK_BASE_ACCOUNT }}
           HAPI_NETWORK_BASE_PASSWORD: ${{ secrets.HAPI_NETWORK_BASE_PASSWORD }}
